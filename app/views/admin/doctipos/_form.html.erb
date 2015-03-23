@@ -1,0 +1,21 @@
+<%= form_for([:admin,@admin_doctipo]) do |f| %>
+  <% if @admin_doctipo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_doctipo.errors.count, "error") %> prohibited this admin_doctipo from being saved:</h2>
+
+      <ul>
+      <% @admin_doctipo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
