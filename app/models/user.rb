@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   # Use friendly_id on Users
   extend FriendlyId
   friendly_id :friendify, use: :slugged
-
+  has_many :userasignaciones
+  has_many :areas, through: :userasignaciones
+  
   # necessary to override friendly_id reserved words
   def friendify
     if username.downcase == "admin"

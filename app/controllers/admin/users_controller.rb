@@ -10,6 +10,10 @@ class Admin::UsersController < Admin::BaseController
 
   def index
     @users = User.search_and_order(params[:search], params[:page])
+    respond_to do |format|
+      format.html
+      format.json{ render json: @users}
+    end
   end
 
   def show

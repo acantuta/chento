@@ -1,0 +1,29 @@
+%div{'ng-app' => 'app', 'ng-controller' => 'AreaAsignacionController'}
+  %h1 Asignación de usuario
+  %div{'ng-class' => '{"hide": current_area }'}
+    %h3 Areas
+    %ul
+      %li{'ng-repeat' => 'area in areas'}
+        %span {{area.nombre}}
+        .clearfix
+        %small 
+          %a{'ng-click' => 'set_current_area(area)' } + ASIGNAR USUARIO
+  %div{'ng-class' => '{ "hide": !current_area }'}
+    %h3 
+      %a{'ng-click' => 'clear_current_area()'} Areas 
+      > {{current_area.nombre}} > Usuarios
+    %ul
+      %li{'ng-repeat' => 'asignacion in data_of_current_area.userasignaciones'} 
+        %span {{asignacion.user.username}} 
+        %a{'ng-click' => 'delete_userasignacion_from_area(asignacion)'} x
+    %form{'ng-submit' => 'buscar_users()'}
+      .row
+        .large-9.columns
+          %input{ type: 'text', placeholder: 'Ingresar DNI', 'ng-model' => 'search_user'}
+        .large-3.columns
+          %a.button.postfix{'ng-click' => 'buscar_users()'} Buscar
+    %ul
+      %li{'ng-repeat' => 'user in users'}
+        %span {{user.username}} 
+        %a{'ng-click' => 'add_user_to_current_area(user)'} agregar
+= javascript_include_tag "areas-asignacion"
