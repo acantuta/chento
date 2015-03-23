@@ -1,4 +1,4 @@
-class Admin::DoctiposController < ApplicationController
+class Admin::DoctiposController < Admin::BaseController
   before_action :set_admin_doctipo, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/doctipos

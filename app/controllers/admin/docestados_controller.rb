@@ -1,4 +1,4 @@
-class Admin::DocestadosController < ApplicationController
+class Admin::DocestadosController < Admin::BaseController
   before_action :set_admin_docestado, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/docestados
