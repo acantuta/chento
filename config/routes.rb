@@ -12,6 +12,7 @@ Chento::Application.routes.draw do
     root "base#index"
     resources :users
     resources :doctipos
+    resources :docestados
     resources :areas do
       collection do
         get 'asignacion'        
