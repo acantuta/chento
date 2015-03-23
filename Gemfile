@@ -43,3 +43,6 @@ gem 'pg'
 
 # Devise: https://github.com/plataformatec/devise
 gem 'devise', '3.4.1'
+gem 'haml', '~> 4.0.6'
+gem 'angularjs-rails', '~> 1.3.14'
+gem 'foundation-rails', '~> 5.5.1.0'
