@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require foundation
 //= require bootstrap 
 //= require analytics
 //= require common
+
+$(function(){ $(document).foundation(); });
