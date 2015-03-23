@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
+  before_filter :set_csrf_cookie_for_ng
 
 
   # Devise permitted params
@@ -52,5 +53,13 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :require_admin!
+
+  def set_csrf_cookie_for_ng
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+  end
+
+  def verified_request?
+    super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
+  end
 
 end
