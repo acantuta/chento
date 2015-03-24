@@ -1,0 +1,9 @@
+%h1{class: 'text-center'}
+  ="DOCUMENTO "
+  =@documento.id
+
+= render 'form'
+
+= link_to 'Show', @documento
+\|
+= link_to 'Back', documentos_path

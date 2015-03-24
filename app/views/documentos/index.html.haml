@@ -1,0 +1,35 @@
+%h1 Listing documentos
+
+%table
+  %thead
+    %tr
+      %th Doctipo
+      %th Docestado
+      %th Nro
+      %th Folios
+      %th Asunto
+      %th Remitente
+      %th Cod remitente
+      %th Ambiente
+      %th
+      %th
+      %th
+
+  %tbody
+    - @documentos.each do |documento|
+      %tr
+        %td= documento.doctipo
+        %td= documento.docestado
+        %td= documento.nro
+        %td= documento.folios
+        %td= documento.asunto
+        %td= documento.remitente
+        %td= documento.cod_remitente
+        %td= documento.ambiente
+        %td= link_to 'Show', documento
+        %td= link_to 'Edit', edit_documento_path(documento)
+        %td= link_to 'Destroy', documento, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Documento', new_documento_path

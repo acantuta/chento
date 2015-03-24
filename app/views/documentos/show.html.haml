@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Doctipo:
+  = @documento.doctipo
+%p
+  %b Docestado:
+  = @documento.docestado
+%p
+  %b Nro:
+  = @documento.nro
+%p
+  %b Folios:
+  = @documento.folios
+%p
+  %b Asunto:
+  = @documento.asunto
+%p
+  %b Remitente:
+  = @documento.remitente
+%p
+  %b Cod remitente:
+  = @documento.cod_remitente
+%p
+  %b Ambiente:
+  = @documento.ambiente
+
+= link_to 'Edit', edit_documento_path(@documento)
+\|
+= link_to 'Back', documentos_path

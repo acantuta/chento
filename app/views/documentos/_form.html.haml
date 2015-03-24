@@ -1,0 +1,34 @@
+= form_for @documento do |f|
+  - if @documento.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@documento.errors.count, "error")} prohibited this documento from being saved:"
+      %ul
+        - @documento.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :doctipos
+    = f.collection_select( :doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
+  .field
+    = f.label :docestado
+    = f.collection_select( :docestado_id, Docestado.all, :id, :nombre, { prompt: 'Seleccione el estado'})
+  .field
+    = f.label :nro
+    = f.text_field :nro
+  .field
+    = f.label :folios
+    = f.text_field :folios
+  .field
+    = f.label :asunto
+    = f.text_field :asunto
+  .field
+    = f.label :remitente
+    = f.text_field :remitente
+  .field
+    = f.label :cod_remitente
+    = f.text_field :cod_remitente
+  .field
+    = f.label :ambiente
+    = f.select(:ambiente, ['interno','externo'])
+  .actions
+    = f.submit 'GRABAR DOCUMENTO',{class: :button}

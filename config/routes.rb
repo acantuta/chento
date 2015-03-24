@@ -1,4 +1,6 @@
 Chento::Application.routes.draw do
+  resources :documentos
+
   resources :areas
 
   root "pages#home"

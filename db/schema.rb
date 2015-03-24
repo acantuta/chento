@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323172844) do
+ActiveRecord::Schema.define(version: 20150324203712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,24 @@ ActiveRecord::Schema.define(version: 20150323172844) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "documentos", force: :cascade do |t|
+    t.integer  "doctipo_id"
+    t.integer  "docestado_id"
+    t.string   "nro"
+    t.string   "folios"
+    t.string   "asunto"
+    t.string   "remitente"
+    t.string   "cod_remitente"
+    t.string   "ambiente"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
+
+  add_index "documentos", ["docestado_id"], name: "index_documentos_on_docestado_id", using: :btree
+  add_index "documentos", ["doctipo_id"], name: "index_documentos_on_doctipo_id", using: :btree
+  add_index "documentos", ["user_id"], name: "index_documentos_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -87,6 +105,9 @@ ActiveRecord::Schema.define(version: 20150323172844) do
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "documentos", "docestados"
+  add_foreign_key "documentos", "doctipos"
+  add_foreign_key "documentos", "users"
   add_foreign_key "userasignaciones", "areas"
   add_foreign_key "userasignaciones", "users"
 end
