@@ -29,6 +29,8 @@ module Chento
     # autoload lib path
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
-
+    config.generators do  |g|
+      g.template_engine :haml
+    end
   end
 end
