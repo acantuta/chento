@@ -11,6 +11,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
     inflect.irregular 'doctipo','doctipos'
     inflect.irregular 'documento','documentos'
     inflect.irregular 'docestado','docestados'
+    inflect.irregular 'movaccion', 'movacciones'
+    inflect.irregular 'docmovimiento', 'docmovimientos'
 #   inflect.uncountable %w( fish sheep )
 end
 

@@ -1,0 +1,23 @@
+.row
+  .columns.large-12.small-12
+    %h1 Acciones de movimiento de documento.
+
+    %table.columns.large-12
+      %thead
+        %tr
+          %th Nombre
+          %th
+          %th
+          %th
+
+      %tbody
+        - @admin_movacciones.each do |admin_movaccion|
+          %tr
+            %td= admin_movaccion.nombre
+            %td= link_to 'mostrar', admin_movaccion_path( admin_movaccion )
+            %td= link_to 'editar', edit_admin_movaccion_path(admin_movaccion)
+            %td= link_to 'eliminar', [:admin, admin_movaccion], :method => :delete, :data => { :confirm => '¿Estás seguro?' }
+
+    %br
+
+    = link_to 'Crear acción', new_admin_movaccion_path

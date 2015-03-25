@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @admin_movaccion.nombre
+
+= link_to 'Editar', admin_movaccion_path(@admin_movaccion)
+\|
+= link_to 'Atrás', admin_movacciones_path

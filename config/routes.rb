@@ -18,6 +18,7 @@ Chento::Application.routes.draw do
     resources :users
     resources :doctipos
     resources :docestados
+    resources :movacciones
     resources :areas do
       collection do
         get 'asignacion'        
