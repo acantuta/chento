@@ -1,4 +1,4 @@
-.row
+.row{'ng-app' => 'app', 'ng-controller' => 'AreaBandejaController','ng-init' => "area_id='#{@area.id}'"}
   .columns.small-12
     .row
       %h1.columns.small-9.large-9
@@ -8,14 +8,16 @@
           =link_to '+ NUEVO DOCUMENTO', new_documento_path(area_generadora_id: @area.id)
   .columns.small-12
     .row
-      .columns.small-3
-        %select
-          %option Por despachar
+      .columns.small-3        
+        %select{ 'ng-model' => 'current_tipo_bandeja' }
+          %option{'ng-repeat' => 'tipo in tipos_bandeja', 'value'=>'{{tipo.id}}'} {{tipo.nombre}}        
       .columns.small-9
         %input{type: 'text', placeholder: 'Ingrese su búsqueda'}
     .row
       .columns.small-12.large-12
-        %table.columns.large-12.small-12
+        %h4.text-center{'ng-class' => "{'hide': !esta_cargando }"} cargando...
+        %h4.text-center{'ng-class' => "{'hide': (movimientos.length>0) }"} La bandeja está vacía.
+        %table.columns.large-12.small-12{'ng-class' => "{'hide': esta_cargando||!(movimientos.length>0)}"}
           %thead
             %tr
               %th 
@@ -23,21 +25,18 @@
               %th ASUNTO
               %th REMITENTE
           %tbody
-            %tr
+            %tr{'ng-repeat' =>'item in movimientos'}
               %td
                 %input{type: :checkbox}
-              %td 12/12/12
-              %td un asunto aquí de nuevo esto jeje
-              %td anthony cantuta
-            %tr
+              %td {{item.documento.created_at}}
               %td
-                %input{type: :checkbox}
-              %td 12/12/12
-              %td un asunto aquí de nuevo esto jeje
-              %td anthony cantuta
-
-
-
-
-
-
+                {{item.documento.asunto}}
+                %ul
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
+                    %a Crear documento y enviar
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
+                    %a Finalizar
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido != 1)}"}
+                    %a{'ng-click' => 'recibir_documento(item)'} Recepcionar            
+              %td {{item.documento.remitente}}
+= javascript_include_tag 'areas-bandeja'

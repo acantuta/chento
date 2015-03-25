@@ -1,6 +1,13 @@
 Chento::Application.routes.draw do
   namespace :areas do
-    resources :base
+    resources :base do
+      member do
+        get 'documentos_esperando'
+        get 'documentos_recibir'
+        get 'documentos_recibidos'
+        post 'recibir_documento'
+      end
+    end
     root "base#index"
   end
 
