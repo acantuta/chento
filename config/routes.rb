@@ -1,4 +1,9 @@
 Chento::Application.routes.draw do
+  namespace :areas do
+    resources :base
+    root "base#index"
+  end
+
   resources :documentos
 
   resources :areas

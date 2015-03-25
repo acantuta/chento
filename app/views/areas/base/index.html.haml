@@ -1,0 +1,5 @@
+%h1{class: 'text-center'} Seleccione el área a administrar.
+%ul
+  - @areas.each do |area|
+    %li
+      =link_to area.nombre, areas_base_path(area)

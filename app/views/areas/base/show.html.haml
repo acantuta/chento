@@ -1,0 +1,43 @@
+.row
+  .columns.small-12
+    .row
+      %h1.columns.small-9.large-9
+        =@area.nombre
+      .columns.small-3.large-3
+        %strong
+          =link_to '+ NUEVO DOCUMENTO', new_documento_path(area_generadora_id: @area.id)
+  .columns.small-12
+    .row
+      .columns.small-3
+        %select
+          %option Por despachar
+      .columns.small-9
+        %input{type: 'text', placeholder: 'Ingrese su búsqueda'}
+    .row
+      .columns.small-12.large-12
+        %table.columns.large-12.small-12
+          %thead
+            %tr
+              %th 
+              %th FECHA
+              %th ASUNTO
+              %th REMITENTE
+          %tbody
+            %tr
+              %td
+                %input{type: :checkbox}
+              %td 12/12/12
+              %td un asunto aquí de nuevo esto jeje
+              %td anthony cantuta
+            %tr
+              %td
+                %input{type: :checkbox}
+              %td 12/12/12
+              %td un asunto aquí de nuevo esto jeje
+              %td anthony cantuta
+
+
+
+
+
+

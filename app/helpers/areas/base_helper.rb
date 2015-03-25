@@ -1,0 +1,2 @@
+module Areas::BaseHelper
+end
