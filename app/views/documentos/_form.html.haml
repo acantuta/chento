@@ -12,7 +12,7 @@
     = f.collection_select( :doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
   .field
     = f.label :docestado
-    = f.collection_select( :docestado_id, Docestado.all, :id, :nombre, { prompt: 'Seleccione el estado'})
+    = f.select(:estado, Docestado.tipos)
   .field
     = f.label :nro
     = f.text_field :nro
