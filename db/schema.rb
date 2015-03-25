@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324203712) do
+ActiveRecord::Schema.define(version: 20150325022440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,11 +43,13 @@ ActiveRecord::Schema.define(version: 20150324203712) do
     t.string   "remitente"
     t.string   "cod_remitente"
     t.string   "ambiente"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
+    t.integer  "area_generadora_id"
   end
 
+  add_index "documentos", ["area_generadora_id"], name: "index_documentos_on_area_generadora_id", using: :btree
   add_index "documentos", ["docestado_id"], name: "index_documentos_on_docestado_id", using: :btree
   add_index "documentos", ["doctipo_id"], name: "index_documentos_on_doctipo_id", using: :btree
   add_index "documentos", ["user_id"], name: "index_documentos_on_user_id", using: :btree

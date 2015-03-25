@@ -15,7 +15,7 @@ class DocumentosController < ApplicationController
 
   # GET /documentos/new
   def new
-    @documento = Documento.new
+    @documento = Documento.new(new_documento_params)
   end
 
   # GET /documentos/1/edit
@@ -25,15 +25,18 @@ class DocumentosController < ApplicationController
   # POST /documentos
   # POST /documentos.json
   def create
-    @documento = Documento.new(documento_params)
-    @documento.user = current_user
-    respond_to do |format|
-      if @documento.save
-        format.html { redirect_to @documento, notice: 'Documento was successfully created.' }
-        format.json { render :show, status: :created, location: @documento }
-      else
-        format.html { render :new }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      @documento = Documento.new(documento_params)
+      @documento.user = current_user
+      
+      respond_to do |format|
+        if @documento.save
+          format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento was successfully created.' }
+          format.json { render :show, status: :created, location: @documento }
+        else
+          format.html { render :new }
+          format.json { render json: @documento.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -70,6 +73,12 @@ class DocumentosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def documento_params
-      params.require(:documento).permit(:doctipo_id, :docestado_id, :nro, :folios, :asunto, :remitente, :cod_remitente, :ambiente)
+      params.require(:documento).permit(:doctipo_id, :docestado_id, :nro, :folios, :asunto, :remitente, :cod_remitente, :ambiente,:area_generadora_id)
+    end
+
+    def new_documento_params
+      params.require(:area_generadora_id)
+      params.permit(:area_generadora_id)
     end
 end
+

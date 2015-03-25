@@ -6,6 +6,7 @@
         - @documento.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :area_generadora_id
   .field
     = f.label :doctipos
     = f.collection_select( :doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
