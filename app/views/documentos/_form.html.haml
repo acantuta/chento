@@ -9,10 +9,10 @@
   = f.hidden_field :area_generadora_id
   .field
     = f.label :doctipos
-    = f.collection_select( :doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
+    = f.collection_select(:doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
   .field
     = f.label :docestado
-    = f.select(:estado, Docestado.tipos)
+    = f.select(:estado, Docestado.tipos )
   .field
     = f.label :nro
     = f.text_field :nro
@@ -31,5 +31,11 @@
   .field
     = f.label :ambiente
     = f.select(:ambiente, ['interno','externo'])
+  .field
+    = f.label :area_destino 
+    = collection_select(:docmovimiento,:area_destino_id, Area.all,:id, :nombre)
+  .field
+    = f.label :accion
+    = collection_select(:docmovimiento,:movaccion_id, Movaccion.all, :id, :nombre)
   .actions
     = f.submit 'GRABAR DOCUMENTO',{class: :button}

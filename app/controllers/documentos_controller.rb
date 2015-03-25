@@ -28,9 +28,12 @@ class DocumentosController < ApplicationController
     ActiveRecord::Base.transaction do
       @documento = Documento.new(documento_params)
       @documento.user = current_user
-      
+      @movimiento = Docmovimiento.new(docmovimiento_params)
+      @movimiento.area_fuente_id = @documento.area_generadora_id
+      @movimiento.documento = @documento      
       respond_to do |format|
         if @documento.save
+          @movimiento.save!
           format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento was successfully created.' }
           format.json { render :show, status: :created, location: @documento }
         else
@@ -72,8 +75,12 @@ class DocumentosController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def documento_params
-      params.require(:documento).permit(:doctipo_id, :docestado_id, :nro, :folios, :asunto, :remitente, :cod_remitente, :ambiente,:area_generadora_id)
+    def documento_params      
+      params.require(:documento).permit(:doctipo_id, :docestado_id, :nro, :folios, :asunto, :remitente, :cod_remitente, :ambiente,:area_generadora_id, :estado)
+    end
+
+    def docmovimiento_params
+      params.require(:docmovimiento).permit(:area_destino_id, :movaccion_id)
     end
 
     def new_documento_params

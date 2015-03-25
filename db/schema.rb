@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325135208) do
+ActiveRecord::Schema.define(version: 20150325152310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20150325135208) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "docmovimientos", force: :cascade do |t|
+    t.integer "area_fuente_id"
+    t.integer "area_destino_id"
+    t.integer "movaccion_id"
+    t.integer "documento_id"
+    t.boolean "recibido"
+  end
+
+  add_index "docmovimientos", ["area_destino_id"], name: "index_docmovimientos_on_area_destino_id", using: :btree
+  add_index "docmovimientos", ["area_fuente_id"], name: "index_docmovimientos_on_area_fuente_id", using: :btree
+  add_index "docmovimientos", ["documento_id"], name: "index_docmovimientos_on_documento_id", using: :btree
+  add_index "docmovimientos", ["movaccion_id"], name: "index_docmovimientos_on_movaccion_id", using: :btree
 
   create_table "doctipos", force: :cascade do |t|
     t.string   "nombre"
@@ -114,6 +127,8 @@ ActiveRecord::Schema.define(version: 20150325135208) do
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "docmovimientos", "documentos"
+  add_foreign_key "docmovimientos", "movacciones"
   add_foreign_key "documentos", "docestados"
   add_foreign_key "documentos", "doctipos"
   add_foreign_key "documentos", "users"
