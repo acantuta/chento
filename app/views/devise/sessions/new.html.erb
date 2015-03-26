@@ -1,24 +1,24 @@
 <div class="row">
-  <div class="col-sm-6 ">
-    <h1>Sign in</h1>
+  <div class="columns small-12 large-12">
+    <h1>Ingresar</h1>
 
     <%= form_for(resource, :as => resource_name,
     :url => session_path(resource_name),
     role: "form") do |f| %>
 
     <div class="form-group">
-      <%= f.label :username %>
+      <%= f.label :dni %>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="columns large-12 small-12">
           <%= f.text_field :username, :autofocus => true, class: "form-control" %>
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :password %>
+      <%= f.label :clave %>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="columns large-12 small-12">
           <%= f.password_field :password, class: "form-control" %>
         </div>
       </div>
@@ -30,15 +30,15 @@
     <div class="form-group">
       <div class="row">
         <div class="col-sm-6">
-          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+          <%= f.check_box :remember_me %> <%= f.label :recordarme %>
         </div>
       </div>
     </div>
     <% end -%>
 
     <div class="row">
-      <div class="col-sm-6">
-        <%= f.submit "Sign in", class: "btn btn-primary" %>
+      <div class="col-sm-12">
+        <%= f.submit "Ingresar", class: "btn btn-primary" %>
       </div>
     </div>
     <% end %>

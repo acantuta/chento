@@ -1,15 +1,14 @@
 
 
 <% if !user_signed_in? %>
-<li><%= link_to "Sign in", new_user_session_path %></li>
+<li><%= link_to "Ingresar", new_user_session_path %></li>
 
 <% else %>
-<li><%= link_to "Protected Page", inside_path %></li>
-
-
+<li class='hide'><%= link_to "Página protegida", inside_path %></li>
+<li><%=link_to "Bandeja de entrada", areas_root_path %></li>
 <% if current_user.admin? %>
 <li><%= link_to "Admin", admin_root_path %></li>
 <% end %>
 
-<li><%= link_to "Sign out", destroy_user_session_path, data:{method: :delete} %></li>
+<li><%= link_to "Salir", destroy_user_session_path, data:{method: :delete} %></li>
 <% end %>

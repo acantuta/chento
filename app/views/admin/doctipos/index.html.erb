@@ -1,27 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class='row'>
+  <div class='columns small-12 large-12'>
+    <p id="notice"><%= notice %></p>
 
-<h1>Listing Admin Doctipos</h1>
+    <h1>Tipos de documento</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class='row'>
+    <table class='columns large-12'>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @admin_doctipos.each do |admin_doctipo| %>
-      <tr>
-        <td><%= admin_doctipo.nombre %></td>
-        <td><%= link_to 'Show', admin_doctipo_path(admin_doctipo) %></td>
-        <td><%= link_to 'Edit', edit_admin_doctipo_path(admin_doctipo) %></td>
-        <td><%= link_to 'Destroy', [:admin, admin_doctipo] , method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @admin_doctipos.each do |admin_doctipo| %>
+          <tr>
+            <td><%= admin_doctipo.nombre %></td>
+            <td>
+              <%= link_to 'Mostrar', admin_doctipo_path(admin_doctipo) %>
+              <%= link_to 'Editar', edit_admin_doctipo_path(admin_doctipo) %>
+              <%= link_to 'Eliminar', [:admin, admin_doctipo] , method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+    
 
-<br>
-
-<%= link_to 'New Doctipo', new_admin_doctipo_path %>
+    <%= link_to '+ Nuevo tipo', new_admin_doctipo_path %>
+  </div>
+</div>
