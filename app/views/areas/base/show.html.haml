@@ -15,7 +15,8 @@
         %input{type: 'text', placeholder: 'Ingrese su búsqueda'}
     .row
       .columns.small-12.large-12
-        %h4.text-center{'ng-class' => "{'hide': !esta_cargando }"} cargando...
+        .text-center{'ng-class' => "{'hide': !esta_cargando }"}=render "pages/loader"
+
         %h4.text-center{'ng-class' => "{'hide': (movimientos.length>0) }"} La bandeja está vacía.
         %table.columns.large-12.small-12{'ng-class' => "{'hide': esta_cargando||!(movimientos.length>0)}"}
           %thead
