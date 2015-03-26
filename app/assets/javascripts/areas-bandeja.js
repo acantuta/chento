@@ -66,8 +66,7 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 			}
 		})
 		 .success(function(d){
-		 	console.log('success');
-		 	console.log(d);
+		 	movimiento.visible = false;
 		 })
 		 .error(function(d){
 		 	console.log('error');
