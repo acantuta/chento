@@ -1,6 +1,6 @@
 class Areas::BaseController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_area, only: [:show, :documentos_esperando, :documentos_recibir, :documentos_recibidos, :recibir_documento]
+  before_filter :set_area, only: [:show, :documentos_esperando, :documentos_recibir, :documentos_recibidos, :recibir_documento, :cambiar_estado_documento]
   def index
   	@areas = current_user.areas
   end
@@ -43,9 +43,24 @@ class Areas::BaseController < ApplicationController
     end
   end
 
+  def cambiar_estado_documento
+    @documento = Documento.find(documento_params[:documento_id])
+    @documento.estado = documento_params[:estado]
+    
+    respond_to do |format|
+      if @documento.save
+        format.json{ render json: @documento}
+      end
+    end
+  end
+
   private
     def set_area
     	@area = Area.find(params[:id])
+    end
+
+    def documento_params      
+      params.permit(:documento_id, :estado)
     end
 
 end
