@@ -4,6 +4,8 @@ class Docmovimiento < ActiveRecord::Base
 	belongs_to :movaccion
 	belongs_to :documento
 
+	scope :descendente, ->{ order(created_at: :desc)}
+
 	after_initialize :after_init
 
 	validates :documento, presence: true

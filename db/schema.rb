@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325152310) do
+ActiveRecord::Schema.define(version: 20150327042110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,13 @@ ActiveRecord::Schema.define(version: 20150325152310) do
   end
 
   create_table "docmovimientos", force: :cascade do |t|
-    t.integer "area_fuente_id"
-    t.integer "area_destino_id"
-    t.integer "movaccion_id"
-    t.integer "documento_id"
-    t.boolean "recibido"
+    t.integer  "area_fuente_id"
+    t.integer  "area_destino_id"
+    t.integer  "movaccion_id"
+    t.integer  "documento_id"
+    t.boolean  "recibido"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "docmovimientos", ["area_destino_id"], name: "index_docmovimientos_on_area_destino_id", using: :btree

@@ -9,6 +9,8 @@ class Documento < ActiveRecord::Base
   validates :asunto, presence: true
   validates :remitente, presence: true
 
+  scope :descendente, ->{ order(created_at: :desc)}
+
   after_initialize :after_init
 
   def after_init

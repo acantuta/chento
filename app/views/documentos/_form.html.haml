@@ -40,7 +40,7 @@
           = collection_select(:docmovimiento,:area_destino_id, Area.all,:id, :nombre)
         .columns.small-9.large-9
           = f.label 'Nombre completo'
-          = f.text_field :remitente
+          %input{type: 'text', placeholder: ''}
       .row
         .columns.small-12.large-12
           = f.label :motivo

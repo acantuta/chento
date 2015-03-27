@@ -23,21 +23,21 @@ class Areas::BaseController < ApplicationController
   end
 
   def documentos_esperando
-    @items = @area.movimientos_fuente.where(recibido: false)
+    @items = @area.movimientos_fuente.where(recibido: false).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_recibir
-    @items = @area.movimientos_destino.where(recibido: false)
+    @items = @area.movimientos_destino.where(recibido: false).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_recibidos
-    @items = @area.movimientos_destino.where(recibido: true)
+    @items = @area.movimientos_destino.where(recibido: true).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
