@@ -5,7 +5,9 @@
         =@area.nombre
       .columns.small-3.large-3
         %strong
-          =link_to '+ NUEVO DOCUMENTO', new_documento_path(area_generadora_id: @area.id)
+          %a.button.small{'href' => new_documento_path(area_generadora_id: @area.id) }
+            =fa_icon 'plus-circle'
+            %strong CREAR DOCUMENTO
   .columns.small-12
     .row
       .columns.small-3        
@@ -29,7 +31,7 @@
             %tr{'ng-repeat' =>'item in movimientos','ng-class' => "{'hide': (item.visible==false)}"}
               %td
                 %input{type: :checkbox}              
-              %td {{item.documento.created_at}}
+              %td {{item.documento.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
               %td
                 %a{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
                 %ul
@@ -38,6 +40,6 @@
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
                     %a Finalizar
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido != 1)}"}
-                    %a{'ng-click' => 'recibir_documento(item)'} Recepcionar            
+                    %a{'ng-click' => 'recibir_documento(item)'} Recepcionar
               %td {{item.documento.remitente}}
 = javascript_include_tag 'areas-bandeja'

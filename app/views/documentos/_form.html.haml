@@ -1,41 +1,53 @@
-= form_for @documento do |f|
-  - if @documento.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@documento.errors.count, "error")} prohibited this documento from being saved:"
-      %ul
-        - @documento.errors.full_messages.each do |msg|
-          %li= msg
+.row
+  .columns.large-12.small-12
+    = form_for @documento do |f|
+      - if @documento.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@documento.errors.count, "error")} prohibited this documento from being saved:"
+          %ul
+            - @documento.errors.full_messages.each do |msg|
+              %li= msg
 
-  = f.hidden_field :area_generadora_id
-  .field
-    = f.label :doctipos
-    = f.collection_select(:doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
-  .field
-    = f.label :docestado
-    = f.select(:estado, Docestado.tipos )
-  .field
-    = f.label :nro
-    = f.text_field :nro
-  .field
-    = f.label :folios
-    = f.text_field :folios
-  .field
-    = f.label :asunto
-    = f.text_field :asunto
-  .field
-    = f.label :remitente
-    = f.text_field :remitente
-  .field
-    = f.label :cod_remitente
-    = f.text_field :cod_remitente
-  .field
-    = f.label :ambiente
-    = f.select(:ambiente, ['interno','externo'])
-  .field
-    = f.label :area_destino 
-    = collection_select(:docmovimiento,:area_destino_id, Area.all,:id, :nombre)
-  .field
-    = f.label :accion
-    = collection_select(:docmovimiento,:movaccion_id, Movaccion.all, :id, :nombre)
-  .actions
-    = f.submit 'GRABAR DOCUMENTO',{class: :button}
+      = f.hidden_field :area_generadora_id
+      .row
+        .columns.small-3.large-3
+          = f.label :tipo
+          = f.collection_select(:doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
+        .columns.small-8.large-8
+          = f.label :nro
+          = f.text_field :nro,{placeholder: 'Ejm: 0012-AREA/UJCM'}
+        .columns.small-1.large-1
+          = f.label :folios
+          = f.text_field :folios
+      .row
+        .columns.small-12.large-12
+          = f.label 'Asunto (*)'
+          = f.text_field :asunto
+      .row
+        .columns.small-12.large-12
+          %strong Remitente
+        .columns.small-3.large-3
+          = f.label 'DNI o RUC'
+          = f.text_field :cod_remitente,{placeholder: 'Ingrese el #'}
+        .columns.small-9.large-9
+          = f.label 'Nombre completo (*)'
+          = f.text_field :remitente
+      .row
+        .columns.small-12.large-12
+          %strong Destinatario
+        .columns.small-3.large-3
+          = f.label :area_destino 
+          = collection_select(:docmovimiento,:area_destino_id, Area.all,:id, :nombre)
+        .columns.small-9.large-9
+          = f.label 'Nombre completo'
+          = f.text_field :remitente
+      .row
+        .columns.small-12.large-12
+          = f.label :motivo
+          = collection_select(:docmovimiento,:movaccion_id, Movaccion.all, :id, :nombre)
+      .field
+        = f.label :ambiente
+        = f.select(:ambiente, ['interno','externo'])
+      .row
+        .columns.small-12.large-12
+          = f.submit 'GRABAR DOCUMENTO',{class: 'button secondary'}

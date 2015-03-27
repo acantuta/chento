@@ -8,4 +8,15 @@ class Documento < ActiveRecord::Base
   validates :area_generadora, presence: true
   validates :asunto, presence: true
   validates :remitente, presence: true
+
+  after_initialize :after_init
+
+  def after_init
+  	unless self.persisted?
+  		self.folios||='1'
+  		self.ambiente||='interno'
+  	end
+  end
+
+
 end
