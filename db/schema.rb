@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327042110) do
+ActiveRecord::Schema.define(version: 20150329040308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20150327042110) do
   add_index "docmovimientos", ["area_fuente_id"], name: "index_docmovimientos_on_area_fuente_id", using: :btree
   add_index "docmovimientos", ["documento_id"], name: "index_docmovimientos_on_documento_id", using: :btree
   add_index "docmovimientos", ["movaccion_id"], name: "index_docmovimientos_on_movaccion_id", using: :btree
+
+  create_table "docreferencias", force: :cascade do |t|
+    t.integer  "documento_padre_id"
+    t.integer  "documento_hijo_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "doctipos", force: :cascade do |t|
     t.string   "nombre"

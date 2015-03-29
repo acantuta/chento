@@ -42,12 +42,20 @@
           = f.label 'Nombre completo'
           %input{type: 'text', placeholder: ''}
       .row
-        .columns.small-12.large-12
+        .columns.small-8.large-8
           = f.label :motivo
           = collection_select(:docmovimiento,:movaccion_id, Movaccion.all, :id, :nombre)
-      .field
-        = f.label :ambiente
-        = f.select(:ambiente, ['interno','externo'])
+        .columns.small-4.large-4
+          = f.label :ambiente
+          = f.select(:ambiente, ['interno','externo'])
       .row
         .columns.small-12.large-12
-          = f.submit 'GRABAR DOCUMENTO',{class: 'button secondary'}
+          %strong
+            Doc. Referencia
+          ='N° '
+          =@documento_hijo.nro 
+          ='/ Asunto:'
+          =@documento_hijo.asunto
+      .row
+        .columns.small-12.large-12
+          = f.submit 'GRABAR DOCUMENTO',{class: 'button'}

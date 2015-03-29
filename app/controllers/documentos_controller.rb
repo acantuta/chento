@@ -87,5 +87,9 @@ class DocumentosController < ApplicationController
       params.require(:area_generadora_id)
       params.permit(:area_generadora_id)
     end
+
+    def new_documento_hijo_params
+      params.permit(:documento_hijo_id)
+    end
 end
 

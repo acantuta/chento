@@ -41,5 +41,7 @@
                     %a Finalizar
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido != 1)}"}
                     %a{'ng-click' => 'recibir_documento(item)'} Recepcionar
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido == 1)}"}
+                    %a{'href' => '/documentos/new?area_generadora_id={{area_id}}&documento_hijo_id={{item.documento.id}}', 'ng-click' => 'recibir_documento(item)'} Generar documento
               %td {{item.documento.remitente}}
 = javascript_include_tag 'areas-bandeja'
