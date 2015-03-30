@@ -84,7 +84,7 @@ end
 (1..areas.count).each do |n|
   u = User.new
   u.username = n.to_s.rjust(8,'0')
-  u.fullname "#{nombres.sample} #{nombres.sample} #{apellidos.sample} #{apellidos.sample}"
+  u.fullname = "#{nombres.sample} #{nombres.sample} #{apellidos.sample} #{apellidos.sample}"
   u.email = "#{u.username}@example.com"
   u.password = '1234'
   u.password_confirmation = '1234'
