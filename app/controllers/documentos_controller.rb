@@ -16,6 +16,9 @@ class DocumentosController < ApplicationController
   # GET /documentos/new
   def new
     @documento = Documento.new(new_documento_params)
+    if params[:documento_hijo_id]
+      @documento_hijo = Documento.find(params[:documento_hijo_id])
+    end
   end
 
   # GET /documentos/1/edit
@@ -30,10 +33,31 @@ class DocumentosController < ApplicationController
       @documento.user = current_user
       @movimiento = Docmovimiento.new(docmovimiento_params)
       @movimiento.area_fuente_id = @documento.area_generadora_id
-      @movimiento.documento = @documento      
+      @movimiento.documento = @documento    
+      if params[:documento_hijo_id]
+        @documento_hijo = Documento.find(params[:documento_hijo_id])
+      end
       respond_to do |format|
         if @documento.save
+          Doclog.create(documento_id: @documento.id, contenido: "Se ha registrado documento.")
+
+          #Graba referencias el documento
+          if new_documento_hijo_params[:documento_hijo_id]
+            doc_hijo_id = new_documento_hijo_params[:documento_hijo_id]
+
+            #Obteniendo las referencias del documento hijo.            
+            refs_hijo = Docreferencia.where(documento_padre_id: doc_hijo_id).all
+
+            #Inserta las referencias del documento hijo.
+            refs_hijo.each do |ref|              
+              Docreferencia.create!(documento_padre_id: @documento.id, documento_hijo_id: ref.documento_hijo_id)
+            end
+
+            Docreferencia.create!(documento_padre_id: @documento.id, documento_hijo_id: doc_hijo_id)
+          end
           @movimiento.save!
+          
+
           format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento was successfully created.' }
           format.json { render :show, status: :created, location: @documento }
         else

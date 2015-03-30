@@ -1,30 +1,53 @@
-%p#notice= notice
+.row
+  .columns.large-12.small-12
+    %p#notice= notice
+    %span.pull-right
+      =fa_icon 'calendar'
+      =@documento.created_at
+    %h1.text-center
+      =fa_icon 'file-o'
+      DOCUMENTO 
+      =@documento.id
+    .row
+      .columns.large-3.small-3
+        %b TIPO:
+        = @documento.doctipo.nombre
+      .columns.large-7.small-7
+        %b Nro:
+        = @documento.nro
+      .columns.large-2.small-2
+        %b Folios:
+        = @documento.folios
+    .row
+      .columns.large-12.small-12
+        %b Asunto:
+        = @documento.asunto
+    .row
+      .columns.large-12.small-12
+        %b Remitente:
+        %div
+          = @documento.remitente
 
-%p
-  %b Doctipo:
-  = @documento.doctipo
-%p
-  %b Docestado:
-  = @documento.docestado
-%p
-  %b Nro:
-  = @documento.nro
-%p
-  %b Folios:
-  = @documento.folios
-%p
-  %b Asunto:
-  = @documento.asunto
-%p
-  %b Remitente:
-  = @documento.remitente
-%p
-  %b Cod remitente:
-  = @documento.cod_remitente
-%p
-  %b Ambiente:
-  = @documento.ambiente
+.row
+  .columns.large-12.small-12
+    %h2
+      =fa_icon 'calendar'
+      HISTORIAL
 
-= link_to 'Edit', edit_documento_path(@documento)
-\|
-= link_to 'Back', documentos_path
+    -if @documento.doclogs
+      - if @documento.doclogs.count>0
+        %table
+          %tr
+            %th Descripción
+            %th Fecha
+          - @documento.doclogs.each do |log|
+            %tr
+              %td
+                =log.contenido
+              %td
+                =log.created_at
+      - else
+        No hay registros.
+
+
+= link_to 'Editar', edit_documento_path(@documento)

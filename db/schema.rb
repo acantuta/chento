@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329040308) do
+ActiveRecord::Schema.define(version: 20150329145633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20150329040308) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "doclogs", force: :cascade do |t|
+    t.integer  "documento_id"
+    t.string   "contenido"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "doclogs", ["documento_id"], name: "index_doclogs_on_documento_id", using: :btree
 
   create_table "docmovimientos", force: :cascade do |t|
     t.integer  "area_fuente_id"
@@ -136,6 +145,7 @@ ActiveRecord::Schema.define(version: 20150329040308) do
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "doclogs", "documentos"
   add_foreign_key "docmovimientos", "documentos"
   add_foreign_key "docmovimientos", "movacciones"
   add_foreign_key "documentos", "docestados"

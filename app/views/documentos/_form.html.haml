@@ -11,7 +11,7 @@
       = f.hidden_field :area_generadora_id
       .row
         .columns.small-3.large-3
-          = f.label :tipo
+          = f.label 'tipo (*)'
           = f.collection_select(:doctipo_id, Doctipo.all, :id, :nombre, {prompt: 'Seleccione el tipo de documento'})
         .columns.small-8.large-8
           = f.label :nro
@@ -48,14 +48,16 @@
         .columns.small-4.large-4
           = f.label :ambiente
           = f.select(:ambiente, ['interno','externo'])
-      .row
-        .columns.small-12.large-12
-          %strong
-            Doc. Referencia
-          ='N° '
-          =@documento_hijo.nro 
-          ='/ Asunto:'
-          =@documento_hijo.asunto
+      - if @documento_hijo
+        .row
+          .columns.small-12.large-12
+            %strong
+              Doc. Referencia
+            ='N° '
+            =@documento_hijo.nro 
+            ='/ Asunto:'
+            =@documento_hijo.asunto
+            =text_field_tag(:documento_hijo_id, @documento_hijo.id)
       .row
         .columns.small-12.large-12
           = f.submit 'GRABAR DOCUMENTO',{class: 'button'}

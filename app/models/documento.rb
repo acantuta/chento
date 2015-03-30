@@ -5,10 +5,12 @@ class Documento < ActiveRecord::Base
   belongs_to :area_generadora, class_name: "Area"
   has_many :docmovimientos
   has_many :docreferencias, foreign_key: :documento_padre_id
+  has_many :doclogs
   validates :user, presence: true
   validates :area_generadora, presence: true
   validates :asunto, presence: true
   validates :remitente, presence: true
+  validates :doctipo, presence: true
 
   scope :descendente, ->{ order(created_at: :desc)}
 
