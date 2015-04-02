@@ -3,6 +3,7 @@ class Areas::BaseController < ApplicationController
   before_filter :set_area, only: [:show, :documentos_esperando, :documentos_recibir, :documentos_recibidos, :recibir_documento, :cambiar_estado_documento]
   def index
   	@areas = current_user.areas
+    redirect_to areas_base_url(@areas.first.id) if @areas.count==1
   end
 
   def show
