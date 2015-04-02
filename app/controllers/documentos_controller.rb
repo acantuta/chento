@@ -19,6 +19,12 @@ class DocumentosController < ApplicationController
     if params[:documento_hijo_id]
       @documento_hijo = Documento.find(params[:documento_hijo_id])
     end
+
+    if params[:area_generadora_id]
+      @area_generadora = Area.find(params[:area_generadora_id])
+      @documento.cod_remitente = @area_generadora.jefes.first.username
+      @documento.remitente = @area_generadora.jefes.first.fullname
+    end
   end
 
   # GET /documentos/1/edit
