@@ -4,7 +4,7 @@
     %li
       %a{'ng-click' => 'clear_current_area()'}
         Areas
-    %li{'ng-class' => '{ "hide": !current_area }'}
+    %li.current{'ng-class' => '{ "hide": !current_area }'}
       {{current_area.nombre}}      
     %li.current{'ng-class' => '{ "hide": !current_area }'}
       Usuarios
