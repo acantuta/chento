@@ -16,4 +16,8 @@ class Area < ActiveRecord::Base
 			
 		end
 	end
+
+	def jefes
+		self.userasignaciones.jefes.map(&:user)
+	end
 end
