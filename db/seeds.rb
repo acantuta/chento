@@ -8,6 +8,7 @@ Documento.destroy_all
 Userasignacion.destroy_all
 User.destroy_all
 Area.destroy_all
+Doctipo.destroy_all
 # Initial seed file to use with Devise User Model
 
 # Temporary admin account
@@ -73,6 +74,8 @@ areas = [
 'Clínica Odontología',
 'Escuela de Postgrado'
 ]
+
+tipos_documento = ['Solicitud', 'Oficio', 'Carta']
 nombres = ['JUAN', 'MARIA', 'JOSÉ', 'GUSTAVO', 'LUIS', 'YOVANA','KATY', 'GABRIEL', 'FRANKLIN', 'VICTOR', 'DIEGO', 'FRANZ', 'RODRIGO']
 apellidos = ['PEREZ', 'CRUZ', 'MAMANI', 'QUISPE', 'ARPASI', 'REAÑO','JUAREZ', 'PAREDES', 'PARI', 'NINARAQUE', 'YUFRA', 'GUTIERREZ']
 
@@ -80,6 +83,9 @@ areas.each do |area|
   Area.create(nombre: area)
 end
 
+tipos_documento.each do |tipos_documento|
+  Doctipo.create(nombre: tipos_documento)
+end
 
 (1..areas.count).each do |n|
   u = User.new
@@ -90,4 +96,11 @@ end
   u.password_confirmation = '1234'
   u.skip_confirmation!
   u.save!
+
+  a = Area.offset(n-1).first
+  ua = Userasignacion.new
+  ua.user = u
+  ua.area = a
+  ua.es_jefe = true
+  ua.save
 end
