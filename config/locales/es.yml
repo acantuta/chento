@@ -1,0 +1,13 @@
+es:
+  activerecord:
+    attributes:
+      documento:
+        doctipo: "Tipo"
+    errors:
+      models:
+        documento:
+          attributes:
+            doctipo:
+              blank: "es requerido"
+            asunto:
+              blank: "es requerido"
