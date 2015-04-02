@@ -1,4 +1,4 @@
-.row{'ng-app' => 'app', 'ng-controller' => 'AreaBandejaController','ng-init' => "area_id='#{@area.id}'"}
+.row.bandeja-entrada-area{'ng-app' => 'app', 'ng-controller' => 'AreaBandejaController','ng-init' => "area_id='#{@area.id}'"}
   .columns.small-12
     .row
       %h1.columns.small-9.large-9
@@ -34,14 +34,19 @@
               %td {{item.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
               %td
                 %a{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
-                %ul
+                %ul.inline-list.lista-movimientos
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
                     %a Crear documento y enviar
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
                     %a Finalizar
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido != 1)}"}
-                    %a{'ng-click' => 'recibir_documento(item)'} Recepcionar
+                    %a{'ng-click' => 'recibir_documento(item)'}
+                      =fa_icon "level-down"
+                      RECEPCIONAR
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido == 1)}"}
-                    %a{'href' => '/documentos/new?area_generadora_id={{area_id}}&documento_hijo_id={{item.documento.id}}', 'ng-click' => 'recibir_documento(item)'} Generar documento
+                    %a{'href' => '/documentos/new?area_generadora_id={{area_id}}&documento_hijo_id={{item.documento.id}}', 'ng-click' => 'recibir_documento(item)'} 
+                      =fa_icon "plus-square"
+                      GENERAR DOCUMENTO
               %td {{item.documento.remitente}}
 = javascript_include_tag 'areas-bandeja'
+= stylesheet_link_tag 'bandeja-entrada-area'
