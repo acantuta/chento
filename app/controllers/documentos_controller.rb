@@ -64,7 +64,7 @@ class DocumentosController < ApplicationController
           @movimiento.save!
           
 
-          format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento was successfully created.' }
+          format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento creado exitosamente.' }
           format.json { render :show, status: :created, location: @documento }
         else
           format.html { render :new }
