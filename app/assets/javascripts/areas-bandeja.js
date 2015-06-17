@@ -23,6 +23,11 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 	$scope.set_tipos_bandeja = function(){
 		$scope.tipos_bandeja = [
 		{
+		'id'  : 'documentos_enviados',
+		'url' : '/areas/base/' + $scope.area_id + '/documentos_enviados.json',
+		'nombre' : 'Enviados'
+		},
+		{
 		'id'  : 'documentos_esperando',
 		'url' : '/areas/base/' + $scope.area_id + '/documentos_esperando.json',
 		'nombre' : 'Por despachar'
