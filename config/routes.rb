@@ -5,6 +5,7 @@ Chento::Application.routes.draw do
         get 'documentos_esperando'
         get 'documentos_recibir'
         get 'documentos_recibidos'
+        get 'documentos_enviados'
         post 'recibir_documento'
         post 'cambiar_estado_documento'
       end
