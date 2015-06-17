@@ -30,12 +30,12 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 		{
 		'id'  : 'documentos_esperando',
 		'url' : '/areas/base/' + $scope.area_id + '/documentos_esperando.json',
-		'nombre' : 'Por despachar'
+		'nombre' : 'No enviados'
 		},
 		{
 		'id' : 'documentos_recibir',
 		'url' : '/areas/base/' + $scope.area_id + '/documentos_recibir.json',
-		'nombre' : 'Por recibir'
+		'nombre' : 'No recibidos'
 		},
 		{
 		'id' : 'documentos_recibidos',
