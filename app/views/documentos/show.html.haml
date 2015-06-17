@@ -45,7 +45,7 @@
               %td
                 =log.contenido
               %td
-                =log.created_at
+                =log.created_at.strftime("%d/%m/%Y %H:%M")
       - else
         No hay registros.
 
