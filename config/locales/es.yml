@@ -11,3 +11,11 @@ es:
               blank: "es requerido"
             asunto:
               blank: "es requerido"
+  devise:
+    failure:
+      user:
+        unauthenticated: "Usuario no autenticado"
+    sessions:
+      user:
+        signed_in: "Usuario conectado"
+        signed_out: "Usuario desconectado"        
