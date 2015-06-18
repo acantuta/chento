@@ -42,11 +42,11 @@
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido != 1)}"}
                     %a{'ng-click' => 'recibir_documento(item)'}
                       =fa_icon "level-down"
-                      RECEPCIONAR
+                      Recepcionar
                   %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido == 1)}"}
                     %a{'href' => '/documentos/new?area_generadora_id={{area_id}}&documento_hijo_id={{item.documento.id}}', 'ng-click' => 'recibir_documento(item)'} 
                       =fa_icon "plus-square"
-                      GENERAR DOCUMENTO
+                      Responder
               %td {{item.documento.remitente}}
 = javascript_include_tag 'areas-bandeja'
 = stylesheet_link_tag 'bandeja-entrada-area'
