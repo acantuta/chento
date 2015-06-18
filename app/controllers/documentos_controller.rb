@@ -1,6 +1,6 @@
 class DocumentosController < ApplicationController
   before_action :authenticate_user!, exept: [:show]
-  before_action :set_documento, only: [:show, :edit, :update, :destroy]
+  before_action :set_documento, only: [:show, :edit, :update, :destroy, :cambiar_estado]
 
   # GET /documentos
   # GET /documentos.json
@@ -97,6 +97,16 @@ class DocumentosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def cambiar_estado
+    @documento.estado = documento_cambiar_estado_params['estado']
+    @documento.save!
+    respond_to do |format|
+      format.json{
+        render json: @documento
+      }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -120,6 +130,11 @@ class DocumentosController < ApplicationController
 
     def new_documento_hijo_params
       params.permit(:documento_hijo_id)
+    end
+
+    def documento_cambiar_estado_params
+      params.require(:estado)
+      params.permit(:estado)
     end
 end
 

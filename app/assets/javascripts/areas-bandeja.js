@@ -78,6 +78,21 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 		 });
 	}
 
+	$scope.cambiar_estado_documento = function (item, estado) {
+	  console.log(item);
+	  $http({
+	  	method: 'post',
+	  	url: '/documentos/' + item.documento_id + "/cambiar_estado.json",
+	  	data: {
+	  		estado: estado
+	  	}
+	  }).success( function ( data ) {
+	  	alert("Se ha cambiado el estado exitosamente");
+	  }).error( function (data) {
+	  	alert("Sucedió un error al cambiar el estado del documento");
+	  });
+	}
+
 	$scope.init = function(){
 		$scope.set_tipos_bandeja();
 	}

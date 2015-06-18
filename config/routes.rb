@@ -13,7 +13,12 @@ Chento::Application.routes.draw do
     root "base#index"
   end
 
-  resources :documentos
+  resources :documentos do
+    member do
+      post 'cambiar_estado'
+      get 'cambiar_estado'
+    end
+  end
 
   root "pages#home"
   get "home", to: "pages#home", as: "home"

@@ -35,11 +35,15 @@
               %td
                 %a{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
                 %ul.inline-list.lista-movimientos
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
-                    %a Crear documento y enviar
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && recibido == 1)}"}
-                    %a Finalizar
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido != 1)}"}
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
+                    %a{"ng-click" => "cambiar_estado_documento(item,'detenido')"}
+                      = fa_icon ''
+                      Detener
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
+                    %a{"ng-click" => "cambiar_estado_documento(item,'finalizado')"}
+                      = fa_icon ''
+                      Finalizar
+                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && !item.recibido)}"}
                     %a{'ng-click' => 'recibir_documento(item)'}
                       =fa_icon "level-down"
                       Recepcionar
