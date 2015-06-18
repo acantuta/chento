@@ -1,6 +1,6 @@
 class Areas::BaseController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_area, only: [:show, :documentos_esperando, :documentos_recibir, :documentos_recibidos, :recibir_documento, :cambiar_estado_documento, :documentos_enviados]
+  before_filter :set_area, only: [:show, :documentos_esperando, :documentos_recibir, :documentos_recibidos, :recibir_documento, :cambiar_estado_documento, :documentos_enviados, :documentos_todos]
   def index
   	@areas = current_user.areas
     redirect_to areas_base_url(@areas.first.id) if @areas.count==1
@@ -54,9 +54,16 @@ class Areas::BaseController < ApplicationController
     end
   end
 
+  def documentos_todos
+    @items = @area.movimientos_fuente_destino
+    respond_to do |format|
+      format.json{ render json: @items.to_json(:include => [:documento]) }
+    end
+  end
+
   def cambiar_estado_documento
     @documento = Documento.find(documento_params[:documento_id])
-    @documento.estado = documento_params[:estado]
+    @documento.estado = documento_params[:estado].descendente
     
     respond_to do |format|
       if @documento.save

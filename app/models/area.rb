@@ -11,6 +11,10 @@ class Area < ActiveRecord::Base
 		Docmovimiento.where(area_destino_id: self.id)
 	end
 
+	def movimientos_fuente_destino
+	  Docmovimiento.where("area_fuente_id = ? or area_destino_id = ?", self.id, self.id)
+	end
+
 	def recibir_documento(options={})
 		if options
 			
