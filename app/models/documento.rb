@@ -16,6 +16,12 @@ class Documento < ActiveRecord::Base
 
   after_initialize :after_init
 
+  after_save {
+    if self.estado_changed?
+      Doclog.create(documento_id: self.id, contenido: "Ha cambiado de estado: #{self.estado_was} a #{self.estado}")
+    end
+  }
+
   def after_init
   	unless self.persisted?
   		self.folios||='1'
