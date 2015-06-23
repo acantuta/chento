@@ -10,16 +10,26 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 	});
 	$scope.$watch('current_tipo_bandeja',function(v){
 		if(v){
-			for(var i in $scope.tipos_bandeja){
-				b = $scope.tipos_bandeja[i]
+			$scope.cargar_movimientos_segun_current_tipo_bandeja(v);
+		}
+	});
+
+	$scope.cargar_movimientos_segun_current_tipo_bandeja = function (v) {
+		for(var i in $scope.tipos_bandeja){
+				var b = $scope.tipos_bandeja[i]
 				if( b.id == v ){
 					$scope.load_movimientos(b);
 					break;
 				}
-			}
+		}
+	}
+
+
+	$scope.$watch('texto_buscar', function (v) {
+		if(v != undefined && v != ""){
+			$scope.cargar_movimientos_segun_current_tipo_bandeja($scope.current_tipo_bandeja);
 		}
 	});
-
 	$scope.set_tipos_bandeja = function(){
 		$scope.tipos_bandeja = [
 		{
@@ -56,7 +66,10 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 		$scope.movimientos = null;
 		$http({
 			method: 'get',
-			url: tipo_bandeja.url
+			url: tipo_bandeja.url,
+			params: {
+				texto_buscar: $scope.texto_buscar
+			}
 		})
 		 .success(function(d){
 		 	$scope.movimientos = d;

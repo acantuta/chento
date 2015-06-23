@@ -27,35 +27,35 @@ class Areas::BaseController < ApplicationController
   end
 
   def documentos_esperando
-    @items = @area.movimientos_fuente.where(recibido: false).descendente
+    @items = @area.movimientos_fuente(texto_buscar: params[:texto_buscar]).where(recibido: false).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_recibir
-    @items = @area.movimientos_destino.where(recibido: false).descendente
+    @items = @area.movimientos_destino(texto_buscar: params[:texto_buscar]).where(recibido: false).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_enviados
-    @items = @area.movimientos_fuente.where(recibido: true).descendente
+    @items = @area.movimientos_fuente(texto_buscar: params[:texto_buscar]).where(recibido: true).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_recibidos
-    @items = @area.movimientos_destino.where(recibido: true).descendente
+    @items = @area.movimientos_destino(texto_buscar: params[:texto_buscar]).where(recibido: true).descendente
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_todos
-    @items = @area.movimientos_fuente_destino
+    @items = @area.movimientos_fuente_destino(texto_buscar: params[:texto_buscar])
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end

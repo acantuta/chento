@@ -14,7 +14,7 @@
         %select{ 'ng-model' => 'current_tipo_bandeja' }
           %option{'ng-repeat' => 'tipo in tipos_bandeja', 'value'=>'{{tipo.id}}'} {{tipo.nombre}}        
       .columns.small-9
-        %input{type: 'text', placeholder: 'Ingrese su búsqueda'}
+        %input{type: 'text', placeholder: 'Ingrese su búsqueda', 'ng-model' => 'texto_buscar'}
     .row
       .columns.small-12.large-12
         .text-center{'ng-class' => "{'hide': !esta_cargando }"}=render "pages/loader"
