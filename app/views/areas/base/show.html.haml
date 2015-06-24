@@ -20,37 +20,39 @@
         .text-center{'ng-class' => "{'hide': !esta_cargando }"}=render "pages/loader"
 
         %h4.text-center{'ng-class' => "{'hide': (movimientos.length>0) }"} La bandeja está vacía.
-        %table.columns.large-12.small-12{'ng-class' => "{'hide': esta_cargando||!(movimientos.length>0)}"}
-          %thead
-            %tr
-              %th 
-              %th FECHA
-              %th ASUNTO
-              %th REMITENTE
-          %tbody
-            %tr{'ng-repeat' =>'item in movimientos','ng-class' => "{'hide': (item.visible==false)}"}
-              %td
-                %input{type: :checkbox}              
-              %td {{item.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
-              %td
-                %a{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
-                %ul.inline-list.lista-movimientos
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
-                    %a{"ng-click" => "cambiar_estado_documento(item,'detenido')"}
-                      = fa_icon ''
-                      Detener
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
-                    %a{"ng-click" => "cambiar_estado_documento(item,'finalizado')"}
-                      = fa_icon ''
-                      Finalizar
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && !item.recibido)}"}
-                    %a{'ng-click' => 'recibir_documento(item)'}
-                      =fa_icon "level-down"
-                      Recepcionar
-                  %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido == 1)}"}
-                    %a{'href' => '/documentos/new?area_generadora_id={{area_id}}&documento_hijo_id={{item.documento.id}}', 'ng-click' => 'recibir_documento(item)'} 
-                      =fa_icon "plus-square"
-                      Responder
-              %td {{item.documento.remitente}}
+        %div.columns.large-12.small-12{'ng-class' => "{'hide': esta_cargando||!(movimientos.length>0)}"}
+          %div.bandeja        
+            %div.item-doc{'ng-repeat' =>'item in movimientos','ng-class' => "{'hide': (item.visible==false)}"}
+              %ul.lado-derecho
+                %li
+                  {{item.estado}}
+                %li
+                  %span.fecha {{item.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
+
+              %ul.lista-movimientos
+                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
+                  %a{"ng-click" => "cambiar_estado_documento(item,'detenido')", title: 'Detener trámite'}
+                    = fa_icon 'pause'
+                    retener
+                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
+                  %a{"ng-click" => "cambiar_estado_documento(item,'finalizado')", title: 'Finalizar trámite'}
+                    = fa_icon 'thumbs-up'
+                    finalizar
+                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && !item.recibido)}"}
+                  %a{'ng-click' => 'recibir_documento(item)', title: 'Recepcionar documento'}
+                    =fa_icon "hand-o-up"
+                    recepcionar
+                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido == 1)}"}
+                  %a{'href' => '/documentos/new?area_generadora_id={{area_id}}&documento_hijo_id={{item.documento.id}}', 'ng-click' => 'recibir_documento(item)', title: 'Responder documento'} 
+                    =fa_icon "mail-reply-all"
+                    responder
+              
+              %span.verificar
+                %input{type: :checkbox}
+              .contenido
+                %span.remitente {{item.documento.remitente}}
+                %a.asunto{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
+              
+              
 = javascript_include_tag 'areas-bandeja'
 = stylesheet_link_tag 'bandeja-entrada-area'

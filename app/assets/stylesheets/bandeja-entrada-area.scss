@@ -1,13 +1,60 @@
 .bandeja-entrada-area{	
-	.lista-movimientos{
-		margin-top:10px;
-		li{
-			font-size:0.67em;
-			background: #eee;
-			padding:3px;
-			a{
-				color: #46454A;
+
+	.bandeja{
+		.item-doc{
+			border-bottom: 1px solid #ccc;
+			padding-top:10px;
+			padding-bottom:5px;
+			height: 100px;
+			min-height: 100px;
+			position:relative;
+
+			.verificar{
+				display: inline-block;
+				height: 100px;
+				input{
+					vertical-align: middle;
+				}
 			}
+			.contenido{
+				display: inline-block;
+				.remitente{
+				display:block;
+				}
+				.asunto{
+					display:block;
+				}	
+			}
+			
+			.lista-movimientos{		
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				float:right;
+				list-style: none;
+				li{
+					font-size:0.67em;
+					background: #eee;
+					padding:3px;
+					display:block;
+					float:left;
+					margin-left: 4px;
+					a{
+						color: #46454A;
+					}
+				}
+			}
+			.lado-derecho{
+				font-size:0.72em;
+				list-style: none;
+				float: right;
+				li{
+					display: inline-block;
+				}
+			}
+		}
+		.fecha{
+			
 		}
 	}
 }
