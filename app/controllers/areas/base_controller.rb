@@ -57,7 +57,14 @@ class Areas::BaseController < ApplicationController
   def documentos_todos
     @items = @area.movimientos_fuente_destino(texto_buscar: params[:texto_buscar])
     respond_to do |format|
-      format.json{ render json: @items.to_json(:include => [:documento]) }
+      format.json{ 
+        render json: @items.to_json(:include => [
+                                                  'documento' => {
+                                                    'include' => ['estado']
+                                                    }
+                                                ]) 
+      }
+
     end
   end
 

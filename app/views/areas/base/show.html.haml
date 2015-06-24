@@ -25,9 +25,9 @@
             %div.item-doc{'ng-repeat' =>'item in movimientos','ng-class' => "{'hide': (item.visible==false)}"}
               %ul.lado-derecho
                 %li
-                  {{item.estado}}
-                %li
                   %span.fecha {{item.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
+                %li
+                  estado: {{item.documento.estado}}
 
               %ul.lista-movimientos
                 %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
@@ -52,6 +52,7 @@
               .contenido
                 %span.remitente {{item.documento.remitente}}
                 %a.asunto{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
+
               
               
 = javascript_include_tag 'areas-bandeja'
