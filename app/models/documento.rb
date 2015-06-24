@@ -26,6 +26,7 @@ class Documento < ActiveRecord::Base
   	unless self.persisted?
   		self.folios||='1'
   		self.ambiente||='interno'
+      self.estado = Docestado.default
   	end
   end
 

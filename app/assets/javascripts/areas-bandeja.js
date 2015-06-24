@@ -24,6 +24,10 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 		}
 	}
 
+	$scope.refrescar_movimientos_bandeja = function(){
+		$scope.cargar_movimientos_segun_current_tipo_bandeja($scope.current_tipo_bandeja);
+	}
+
 
 	$scope.$watch('texto_buscar', function (v) {
 		if(v != undefined && v != ""){
@@ -105,7 +109,7 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 	  		estado: estado
 	  	}
 	  }).success( function ( data ) {
-	  	alert("Se ha cambiado el estado exitosamente");
+	  	$scope.refrescar_movimientos_bandeja();	  	
 	  }).error( function (data) {
 	  	alert("Sucedió un error al cambiar el estado del documento");
 	  });

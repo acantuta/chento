@@ -1,5 +1,9 @@
 class Docestado < ActiveRecord::Base
 	def self.tipos
-		['tramitando','finalizado','cancelado','detenido']
+		['procesando','finalizado','detenido']
+	end
+
+	def self.default
+		self.tipos.first
 	end
 end
