@@ -3,10 +3,11 @@
     = form_for @documento do |f|
       - if @documento.errors.any?
         #error_explanation
-          %h2= "#{pluralize(@documento.errors.count, "error")} prohibited this documento from being saved:"
-          %ul
-            - @documento.errors.full_messages.each do |msg|
-              %li= msg
+          %h2= "#{pluralize(@documento.errors.count, "error")} prohibited this documento from being saved:"          
+          - @documento.errors.full_messages.each do |msg|
+            .alert-box.alert{'data-alert' => true}
+              =msg
+              %a.close{href: '#'} &times;
 
       = f.hidden_field :area_generadora_id
       .row
@@ -37,10 +38,10 @@
           %strong Destinatario
         .columns.small-3.large-3
           = f.label :area_destino 
-          = collection_select(:docmovimiento,:area_destino_id, Area.all,:id, :nombre)
+          = collection_select(:docmovimiento,:area_destino_id, @areas_destino,:id, :nombre, {prompt: 'Seleccione destino'})
         .columns.small-9.large-9
           = f.label 'Nombre completo'
-          %input{type: 'text', placeholder: ''}
+          = f.text_field :destinatario
       .row
         .columns.small-8.large-8
           = f.label :motivo
@@ -57,7 +58,7 @@
             =@documento_hijo.nro 
             ='/ Asunto:'
             =@documento_hijo.asunto
-            =text_field_tag(:documento_hijo_id, @documento_hijo.id)
+            =hidden_field_tag(:documento_hijo_id, @documento_hijo.id)
       .row
         .columns.small-12.large-12
           = f.submit 'GRABAR DOCUMENTO',{class: 'button'}

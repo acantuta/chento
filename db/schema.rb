@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330223702) do
+ActiveRecord::Schema.define(version: 20150629162714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20150330223702) do
     t.integer  "user_id"
     t.integer  "area_generadora_id"
     t.string   "estado"
+    t.string   "destinatario"
   end
 
   add_index "documentos", ["area_generadora_id"], name: "index_documentos_on_area_generadora_id", using: :btree

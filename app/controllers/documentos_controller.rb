@@ -16,6 +16,7 @@ class DocumentosController < ApplicationController
   # GET /documentos/new
   def new
     @documento = Documento.new(new_documento_params)
+    @areas_destino = Area.all
     if params[:documento_hijo_id]
       @documento_hijo = Documento.find(params[:documento_hijo_id])
     end
@@ -24,6 +25,7 @@ class DocumentosController < ApplicationController
       @area_generadora = Area.find(params[:area_generadora_id])
       @documento.cod_remitente = @area_generadora.jefes.first.username
       @documento.remitente = @area_generadora.jefes.first.fullname
+      @areas_destino = @areas_destino.where.not(id: @area_generadora.id).all
     end
   end
 
@@ -39,7 +41,9 @@ class DocumentosController < ApplicationController
       @documento.user = current_user
       @movimiento = Docmovimiento.new(docmovimiento_params)
       @movimiento.area_fuente_id = @documento.area_generadora_id
-      @movimiento.documento = @documento    
+      @movimiento.documento = @documento
+      @documento.movimiento = @movimiento
+      
       if params[:documento_hijo_id]
         @documento_hijo = Documento.find(params[:documento_hijo_id])
       end
@@ -67,6 +71,11 @@ class DocumentosController < ApplicationController
           format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento creado exitosamente.' }
           format.json { render :show, status: :created, location: @documento }
         else
+          
+          if @movimiento
+            @areas_destino = Area.all.where.not(id: @movimiento.area_fuente_id).all
+          end
+
           format.html { render :new }
           format.json { render json: @documento.errors, status: :unprocessable_entity }
         end
@@ -116,7 +125,7 @@ class DocumentosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def documento_params      
-      params.require(:documento).permit(:doctipo_id, :docestado_id, :nro, :folios, :asunto, :remitente, :cod_remitente, :ambiente,:area_generadora_id, :estado)
+      params.require(:documento).permit(:doctipo_id, :docestado_id, :nro, :folios, :asunto, :remitente, :cod_remitente, :ambiente,:area_generadora_id, :estado, :destinatario)
     end
 
     def docmovimiento_params

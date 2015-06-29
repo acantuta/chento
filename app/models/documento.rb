@@ -1,4 +1,6 @@
 class Documento < ActiveRecord::Base
+  attr_accessor :movimiento
+
   belongs_to :doctipo
   belongs_to :docestado
   belongs_to :user
@@ -11,6 +13,10 @@ class Documento < ActiveRecord::Base
   validates :asunto, presence: true
   validates :remitente, presence: true
   validates :doctipo, presence: true
+  
+  validate {
+    @errors.add('Destinatario', 'es inválido') unless @movimiento.valid?
+  }
 
   scope :descendente, ->{ order(created_at: :desc)}
 

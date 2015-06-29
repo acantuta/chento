@@ -4,6 +4,9 @@ class Docmovimiento < ActiveRecord::Base
 	belongs_to :movaccion
 	belongs_to :documento
 
+	validates :area_destino, presence: true
+	validates :area_fuente, presence: true
+
 	scope :descendente, ->{ order(created_at: :desc)}
 
 	after_initialize :after_init
