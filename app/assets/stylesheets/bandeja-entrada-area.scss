@@ -23,7 +23,19 @@
 				}
 				.asunto{
 					display:block;
-				}	
+				}
+				.tags{
+				  list-style: none;
+				  margin-left: 0;
+				  li{
+					font-size:0.67em;
+					background: #eee;
+					padding:3px;
+					display:block;
+					float:left;
+					margin-left: 4px;
+				    }
+				}
 			}
 			
 			.lista-movimientos{		

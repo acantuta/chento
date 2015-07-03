@@ -52,6 +52,10 @@
               .contenido
                 %span.remitente {{item.documento.remitente}}
                 %a.asunto{'href' => "/documentos/{{item.documento_id}}"} {{item.documento.asunto}}
+                %ul.tags
+                  %li{'ng-repeat' => 'tag in item.tags'} 
+                    =fa_icon 'tag'
+                    {{tag}}
 
               
               
