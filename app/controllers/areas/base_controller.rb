@@ -26,31 +26,31 @@ class Areas::BaseController < ApplicationController
     end
   end
 
-  def documentos_esperando
-    @items = @area.movimientos_fuente(texto_buscar: params[:texto_buscar]).where(recibido: false).descendente
+  def documentos_esperando    
+    @items = @area.movimientos_esperando(texto_buscar: params[:texto_buscar])
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
   def documentos_recibir
-    @items = @area.movimientos_destino(texto_buscar: params[:texto_buscar]).where(recibido: false).descendente
+    @items = @area.movimientos_recibir(texto_buscar: params[:texto_buscar])
     respond_to do |format|
-      format.json{ render json: @items.to_json(:include => [:documento]) }
+      format.json{ render json: @items.to_json }
     end
   end
 
   def documentos_enviados
-    @items = @area.movimientos_fuente(texto_buscar: params[:texto_buscar]).where(recibido: true).descendente
+    @items = @area.movimientos_enviados(texto_buscar: params[:texto_buscar])
     respond_to do |format|
       format.json{ render json: @items.to_json(:include => [:documento]) }
     end
   end
 
-  def documentos_recibidos
-    @items = @area.movimientos_destino(texto_buscar: params[:texto_buscar]).where(recibido: true).descendente
+  def documentos_recibidos    
+    @items = @area.movimientos_recibidos(texto_buscar: params[:texto_buscar])
     respond_to do |format|
-      format.json{ render json: @items.to_json(:include => [:documento]) }
+      format.json{ render json: @items.to_json }
     end
   end
 
@@ -58,11 +58,7 @@ class Areas::BaseController < ApplicationController
     @items = @area.movimientos_fuente_destino(texto_buscar: params[:texto_buscar])
     respond_to do |format|
       format.json{ 
-        render json: @items.to_json(:include => [
-                                                  'documento' => {
-                                                    'include' => ['estado']
-                                                    }
-                                                ]) 
+        render json: @items.to_json
       }
 
     end
