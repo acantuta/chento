@@ -15,7 +15,7 @@ class Documento < ActiveRecord::Base
   validates :doctipo, presence: true
   
   validate {
-    @errors.add('Destinatario', 'es inválido') unless @movimiento.valid?
+    @errors.add('Destinatario', 'es inválido') if @movimiento and not @movimiento.valid?
   }
 
   scope :descendente, ->{ order(created_at: :desc)}
