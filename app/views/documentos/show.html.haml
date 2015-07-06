@@ -1,53 +1,54 @@
+- content_for :head do
+  =stylesheet_link_tag :documentos
 .row
-  .columns.large-12.small-12
-    %p#notice= notice
-    %span.pull-right
-      =fa_icon 'calendar'
-      =@documento.created_at
-    %h1.text-center
-      =fa_icon 'file-o'
-      DOCUMENTO 
-      =@documento.id
-    .row
-      .columns.large-3.small-3
-        %b TIPO:
-        = @documento.doctipo.nombre
-      .columns.large-7.small-7
-        %b Nro:
-        = @documento.nro
-      .columns.large-2.small-2
-        %b Folios:
-        = @documento.folios
+  .columns.large-12.small-12.documento
     .row
       .columns.large-12.small-12
-        %b Asunto:
-        = @documento.asunto
+        %p#notice= notice
+        %span.pull-right
+          =fa_icon 'calendar'
+          =@documento.created_at
+        %h1.text-center
+          =fa_icon 'file-o'
+          DOCUMENTO 
+          =@documento.id
+        .row
+          .columns.large-3.small-3
+            %b TIPO:
+            = @documento.doctipo.nombre
+          .columns.large-7.small-7
+            %b Nro:
+            = @documento.nro
+          .columns.large-2.small-2
+            %b Folios:
+            = @documento.folios
+        .row
+          .columns.large-12.small-12
+            %b Asunto:
+            = @documento.asunto
+        .row
+          .columns.large-12.small-12
+            %b Remitente:
+            %div
+              = @documento.remitente
+
     .row
-      .columns.large-12.small-12
-        %b Remitente:
-        %div
-          = @documento.remitente
+      .columns.large-12.small-12.historial
+        %h3
+          =fa_icon 'calendar'
+          HISTORIAL
 
-.row
-  .columns.large-12.small-12
-    %h2
-      =fa_icon 'calendar'
-      HISTORIAL
-
-    -if @documento.doclogs
-      - if @documento.doclogs.count>0
-        %table
-          %tr
-            %th Descripción
-            %th Fecha
-          - @documento.doclogs.each do |log|
-            %tr
-              %td
-                =log.contenido
-              %td
-                =log.created_at.strftime("%d/%m/%Y %H:%M")
-      - else
-        No hay registros.
-
-
-= link_to 'Editar', edit_documento_path(@documento)
+        -if @documento.doclogs
+          - if @documento.doclogs.count>0
+            %table
+              %tr
+                %th Descripción
+                %th Fecha
+              - @documento.doclogs.each do |log|
+                %tr
+                  %td
+                    =log.contenido
+                  %td
+                    =log.created_at.strftime("%d/%m/%Y %H:%M")
+          - else
+            No hay registros.
