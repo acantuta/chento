@@ -47,3 +47,4 @@ gem "haml-rails", "~> 0.9"
 gem 'angularjs-rails', '~> 1.3.14'
 gem 'foundation-rails', '~> 5.5.1.0'
 gem 'font-awesome-rails', '~> 4.3.0.0'
+gem 'faker'
