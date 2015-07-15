@@ -30,11 +30,11 @@
                   estado: {{item.documento.estado}}
 
               %ul.lista-movimientos
-                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
+                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido) || item.documento.estado=='finalizado' }"}
                   %a{"ng-click" => "cambiar_estado_documento(item,'detenido')", title: 'Detener trámite'}
                     = fa_icon 'pause'
                     retener
-                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido)}"}
+                %li{'ng-class' => "{'hide':!(item.area_destino_id==area_id && item.recibido) || item.documento.estado=='finalizado' }"}
                   %a{"ng-click" => "cambiar_estado_documento(item,'finalizado')", title: 'Finalizar trámite'}
                     = fa_icon 'thumbs-up'
                     finalizar
