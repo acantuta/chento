@@ -12,10 +12,25 @@ class Docmovimiento < ActiveRecord::Base
 	after_initialize :after_init
 	after_save {	  
 	  if self.recibido==false
+	  	
+	  	Doclog.create!(documento_id: self.documento.id, contenido: "Se ha creado documento: \"#{self.documento.nro}\", con asunto: \"#{self.documento.asunto}\" con destino a \"#{self.area_destino.nombre}\"")
+
 	  	referencias = self.documento.docreferencias.all
 	  	if referencias.count > 0
 	  	  referencias.each do |ref|	  	  	
 		    Doclog.create!(documento_id: ref.documento_hijo_id, contenido: "Se ha creado documento: \"#{self.documento.nro}\", con asunto: \"#{self.documento.asunto}\" con destino a \"#{self.area_destino.nombre}\"")
+		  end
+		end
+	  end
+
+	  if self.recibido == true
+
+	  	Doclog.create!(documento_id: self.documento.id, contenido: "Se ha recibido documento: \"#{self.documento.nro}\", con asunto: \"#{self.documento.asunto}\" en \"#{self.area_destino.nombre}\"")
+
+	  	referencias = self.documento.docreferencias.all
+	  	if referencias.count > 0
+	  	  referencias.each do |ref|	  	  	
+		    Doclog.create!(documento_id: ref.documento_hijo_id, contenido: "Se ha recibido documento: \"#{self.documento.nro}\", con asunto: \"#{self.documento.asunto}\" en \"#{self.area_destino.nombre}\"")
 		  end
 		end
 	  end
