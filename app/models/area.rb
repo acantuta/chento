@@ -18,7 +18,7 @@ class Area < ActiveRecord::Base
 	end
 
 	def movimientos_fuente_destino(params = {})
-	  items = DocmovimientoArea.where("area_fuente_id = ? or area_destino_id = ?", self.id, self.id)	  
+	  items = DocmovimientoArea.where("area_fuente_id = ? or area_destino_id = ?", self.id, self.id).descendente
 	  items = self.buscar_texto(items, params[:texto_buscar]) unless params[:texto_buscar].blank?
 	  items = self.wrap_movimientos(items)
 	  return items
