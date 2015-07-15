@@ -28,13 +28,28 @@
 				  list-style: none;
 				  margin-left: 0;
 				  li{
-					font-size:0.67em;
+					font-size:0.7em;
 					background: #eee;
 					padding:3px;
 					display:block;
 					float:left;
 					margin-left: 4px;
-				    }
+					width: 80px;
+					color: white;
+					&.recibido{
+					 background: rgba(0, 140, 186, 1);
+					}
+					&.no-recibido{
+					 background: rgba(254, 159, 30, 1);
+					}
+					&.enviado{
+					 background: rgba(67, 172, 106, 1);
+					}
+					&.no-enviado{
+					 background: rgba(240, 65, 36, 1);
+					}
+				  }
+				   
 				}
 			}
 			
