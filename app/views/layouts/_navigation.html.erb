@@ -13,6 +13,17 @@
       <ul class="nav navbar-nav">
         <%= render 'layouts/navigation_links' %>
       </ul>
+
+      <ul class="nav navbar-nav right">
+        <% if user_signed_in? %>
+        <li>
+          <a data-method="delete" href="<%=destroy_user_session_path%>">
+            <%=fa_icon 'power-off' %>
+            SALIR
+          </a>
+        </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
