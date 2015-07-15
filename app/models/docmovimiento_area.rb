@@ -9,11 +9,11 @@ class DocmovimientoArea < Docmovimiento
 	def tags
 	  items = []
 	  if self.fuente?
-	    items << ( self.enviado? ? 'enviado' : 'no enviado' )
+	    items << ( self.enviado? ? {id: 'enviado',nombre: 'enviado'} : {id: 'no-enviado',nombre: 'no enviado'}  )
 	  end
 	  
 	  if self.destino?
-	  	items << ( self.recibido? ? 'recibido' : 'no recibido' )
+	  	items << ( self.recibido? ? {id: 'recibido',nombre: 'recibido'} : {id: 'no-recibido',nombre: 'no recibido'} )
 	  end
 	  
 	  return items
