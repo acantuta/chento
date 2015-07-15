@@ -1,5 +1,5 @@
 class Documento < ActiveRecord::Base
-  attr_accessor :movimiento
+  attr_accessor :movimiento, :documento_hijo
 
   belongs_to :doctipo
   belongs_to :docestado
@@ -23,6 +23,26 @@ class Documento < ActiveRecord::Base
   after_initialize :after_init
 
   after_save {
+    
+    if self.id_changed?
+      Doclog.create(documento_id: self.id, contenido: "Se ha registrado documento.")
+
+      #Graba referencias el documento
+      if @documento_hijo
+        doc_hijo_id = @documento_hijo.id
+
+        #Obteniendo las referencias del documento hijo.            
+        refs_hijo = Docreferencia.where(documento_padre_id: doc_hijo_id).all
+
+        #Inserta las referencias del documento hijo.
+        refs_hijo.each do |ref|              
+          Docreferencia.create!(documento_padre_id: self.id, documento_hijo_id: ref.documento_hijo_id)
+        end
+
+        Docreferencia.create!(documento_padre_id: self.id, documento_hijo_id: doc_hijo_id)
+      end
+    end
+
     if self.estado_changed?
       Doclog.create(documento_id: self.id, contenido: "Ha cambiado de estado: #{self.estado_was} a #{self.estado}")
     end

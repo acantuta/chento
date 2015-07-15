@@ -46,28 +46,13 @@ class DocumentosController < ApplicationController
       
       if params[:documento_hijo_id]
         @documento_hijo = Documento.find(params[:documento_hijo_id])
+        @documento.documento_hijo = @documento_hijo
       end
       respond_to do |format|
-        if @documento.save
-          Doclog.create(documento_id: @documento.id, contenido: "Se ha registrado documento.")
-
-          #Graba referencias el documento
-          if new_documento_hijo_params[:documento_hijo_id]
-            doc_hijo_id = new_documento_hijo_params[:documento_hijo_id]
-
-            #Obteniendo las referencias del documento hijo.            
-            refs_hijo = Docreferencia.where(documento_padre_id: doc_hijo_id).all
-
-            #Inserta las referencias del documento hijo.
-            refs_hijo.each do |ref|              
-              Docreferencia.create!(documento_padre_id: @documento.id, documento_hijo_id: ref.documento_hijo_id)
-            end
-
-            Docreferencia.create!(documento_padre_id: @documento.id, documento_hijo_id: doc_hijo_id)
-          end
+        if @documento.save          
+          
           @movimiento.save!
           
-
           format.html { redirect_to areas_base_path(@documento.area_generadora_id), notice: 'Documento creado exitosamente.' }
           format.json { render :show, status: :created, location: @documento }
         else
