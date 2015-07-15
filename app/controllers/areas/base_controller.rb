@@ -15,8 +15,7 @@ class Areas::BaseController < ApplicationController
     if @area.id == @movimiento.area_destino_id
       @movimiento.recibido = true
       @documento = @movimiento.documento
-      @area_destino = @movimiento.area_destino
-      Doclog.create(documento_id: @movimiento.documento_id, contenido: "Se ha recibido documento: \"#{@documento.nro}\n con asunto: \"#{@documento.asunto}\" en area: \"#{@area_destino.nombre}\"")
+      @area_destino = @movimiento.area_destino      
     end
 
     respond_to do |format|
