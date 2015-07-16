@@ -8,10 +8,18 @@
       {{current_area.nombre}}      
     %li.current{'ng-class' => '{ "hide": !current_area }'}
       Usuarios
-  %div{'ng-class' => '{"hide": current_area }'}
-    %ul
-      %li{'ng-repeat' => 'area in areas'}
-        %a{'ng-click' => 'set_current_area(area)' } {{area.nombre}}
+  %div.row{'ng-class' => '{"hide": current_area }'}
+    %table.large-12
+      %thead
+        %tr
+          %th Area
+      %tr{'ng-repeat' => 'area in areas'}
+        %td
+          %a{'ng-click' => 'set_current_area(area)' } {{area.nombre}}
+          %p.right
+            %a{'ng-click' => 'set_current_area(area)' } Asignar usuario
+            %a{href: '/admin/areas/{{area.id}}/edit'} Editar
+            %a{href: '/admin/areas/{{area.id}}/edit', 'data-method' => 'delete', 'data-confirm' => '¿ Estás seguro ?'} Eliminar
   %div{'ng-class' => '{ "hide": !current_area }'}  
     %ul
       %li{'ng-repeat' => 'asignacion in data_of_current_area.userasignaciones'} 
