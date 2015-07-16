@@ -3,6 +3,7 @@
 var app = angular.module("app",[]);
 app.controller("AreaBandejaController",['$scope','$http',function($scope, $http){
 	$scope.esta_cargando  = false;
+	$scope.current_page = 1;
 	$scope.$watch("area_id",function(v){
 		if(v){
 			$scope.init();
@@ -11,6 +12,12 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 	$scope.$watch('current_tipo_bandeja',function(v){
 		if(v){
 			$scope.cargar_movimientos_segun_current_tipo_bandeja(v);
+		}
+	});
+
+	$scope.$watch('current_page', function(v){
+		if(v){
+			$scope.refrescar_movimientos_bandeja();
 		}
 	});
 
@@ -72,7 +79,8 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 			method: 'get',
 			url: tipo_bandeja.url,
 			params: {
-				texto_buscar: $scope.texto_buscar
+				texto_buscar: $scope.texto_buscar,
+				page: $scope.current_page
 			}
 		})
 		 .success(function(d){
@@ -115,7 +123,20 @@ app.controller("AreaBandejaController",['$scope','$http',function($scope, $http)
 	  });
 	}
 
+	$scope.reset_page = function(){
+		$scope.current_page = 1;
+	}
+
+	$scope.siguiente_pagina = function(){
+		$scope.current_page += 1;
+	}
+
+	$scope.anterior_pagina = function(){
+		$scope.current_page -= 1;
+	}
+
 	$scope.init = function(){
+		$scope.reset_page();
 		$scope.set_tipos_bandeja();
 	}
 	

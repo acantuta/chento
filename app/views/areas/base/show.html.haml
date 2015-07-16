@@ -56,8 +56,21 @@
                   %li{'ng-repeat' => 'tag in item.tags', 'ng-class' => 'tag.id'} 
                     =fa_icon 'tag'
                     {{tag.nombre}}
+          .paginador.text-center
+            %ul.pagination.text-center
+              %li
+                %a.btn-cargar-mas{'ng-click' => 'anterior_pagina()', 'ng-if' => 'current_page>1'}
+                  &laquo; Anterior
+              %li
+                %a.btn-cargar-mas{'ng-click' => 'reset_page()', 'ng-if' => 'current_page>2'} 1
+              %li.unavailable{'ng-if' => 'current_page>2'}
+                %a &hellip;
+              %li
+                %a
+                  Pág. {{current_page}}
+              %li
+                %a.btn-cargar-mas{'ng-click' => 'siguiente_pagina()'}
+                  Siguiente &raquo; 
 
-              
-              
 = javascript_include_tag 'areas-bandeja'
 = stylesheet_link_tag 'bandeja-entrada-area'
