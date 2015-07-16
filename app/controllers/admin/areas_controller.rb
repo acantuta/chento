@@ -51,7 +51,7 @@ class Admin::AreasController < Admin::BaseController
   def update
     respond_to do |format|
       if @area.update(area_params)
-        format.html { redirect_to @area, notice: 'Area was successfully updated.' }
+        format.html { redirect_to controller: :areas, action: :asignacion, notice: 'Area ha sido actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @area }
       else
         format.html { render :edit }
