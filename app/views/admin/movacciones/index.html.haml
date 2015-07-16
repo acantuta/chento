@@ -6,17 +6,15 @@
       %thead
         %tr
           %th Nombre
-          %th
-          %th
-          %th
-
       %tbody
         - @admin_movacciones.each do |admin_movaccion|
           %tr
-            %td= admin_movaccion.nombre
-            %td= link_to 'mostrar', admin_movaccion_path( admin_movaccion )
-            %td= link_to 'editar', edit_admin_movaccion_path(admin_movaccion)
-            %td= link_to 'eliminar', [:admin, admin_movaccion], :method => :delete, :data => { :confirm => '¿Estás seguro?' }
+            %td
+              = admin_movaccion.nombre
+              %p.right
+                = link_to 'Mostrar', admin_movaccion_path( admin_movaccion )
+                = link_to 'Editar', edit_admin_movaccion_path(admin_movaccion)
+                = link_to 'Eliminar', [:admin, admin_movaccion], :method => :delete, :data => { :confirm => '¿Estás seguro?' }
 
     = link_to '+ Nueva acción', new_admin_movaccion_path
 
